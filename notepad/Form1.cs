@@ -83,10 +83,10 @@ namespace notepad
         {
             if (fontDialog1.ShowDialog() == DialogResult.Cancel)
                 return;
-            // изменяем шрифт
-            изменитьШрифтToolStripMenuItem.Font = fontDialog1.Font;
-            // изменяем цвет
-            изменитьШрифтToolStripMenuItem.ForeColor = fontDialog1.Color;
+            // изменяется шрифт
+            richTextBox1.Font = fontDialog1.Font;
+            // изменяется цвет
+            richTextBox1.ForeColor = fontDialog1.Color;
         }
     }
 }
