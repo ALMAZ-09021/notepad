@@ -20,14 +20,23 @@ namespace notepad
             saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
             fontDialog1.ShowColor = true;
         }
+        bool isSaved = true;
         private void выходToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            
+                this.Close();
+            
+            
         }
         public bool UpdateInForm = false;
         private void richtextBox1_TextChanged(object sender, EventArgs e)
         {
             UpdateInForm = true;
+        }
+        
+        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        {
+            isSaved =false;
         }
         private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -76,8 +85,8 @@ namespace notepad
             // прочитываем выбранный файл
             string fileText = System.IO.File.ReadAllText(filename);
             richTextBox1.Text = fileText;
+         
         }
-
         private void сохранитьToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
@@ -87,6 +96,7 @@ namespace notepad
             // сохраняем текст в выбранный файл файл
             System.IO.File.WriteAllText(filename, richTextBox1.Text);
             MessageBox.Show("Файл сохранен");
+            isSaved = true;
         }
 
         private void выходToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -157,8 +167,9 @@ namespace notepad
         private void Блокнот_FormClosing(object sender, FormClosingEventArgs e)
         {
 
+
              e.Cancel = false;
-             if (richTextBox1.TextLength!=0)
+             if (!isSaved)
              {
                  DialogResult res = MessageBox.Show("Сохранить?", "Внимание", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
                  if (res == DialogResult.Cancel)
@@ -183,6 +194,7 @@ namespace notepad
              }
         }
 
+        
     }
 
 }
