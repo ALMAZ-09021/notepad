@@ -177,7 +177,7 @@ namespace notepad
                      }
                      else
                      {
-                         Close();
+                        e.Cancel = true;
                      }
                  }       
              }
