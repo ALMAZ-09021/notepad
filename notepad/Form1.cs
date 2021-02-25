@@ -67,10 +67,6 @@ namespace notepad
             richTextBox1.Cut();
         }
 
-
-
-
-
         private void открытьToolStripMenuItem1_Click(object sender, EventArgs e)
         {
             if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
@@ -95,29 +91,7 @@ namespace notepad
 
         private void выходToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            if (richTextBox1.TextLength != 0)
-            {
-                DialogResult res = MessageBox.Show("Сохранить?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (res == DialogResult.Yes)
-                {
-                    SaveFileDialog ttt = new SaveFileDialog();
-                    ttt.FileName = "Безымянный";
-                    ttt.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
-
-                    if (ttt.ShowDialog() == DialogResult.OK)
-                    {
-                        File.WriteAllText(ttt.FileName, richTextBox1.Text);
-                    }
-                }
-                if (res == DialogResult.No)
-                {
-                    this.Close();
-                }
-            }
-            if (richTextBox1.TextLength == 0)
-            {
-                this.Close();
-            }
+            this.Close();
         }
 
         private void выбратьВсеToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -182,26 +156,31 @@ namespace notepad
 
         private void Блокнот_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (richTextBox1.TextLength != 0)
-            {
-                DialogResult res = MessageBox.Show("Сохранить?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (res == DialogResult.Yes)
-                {
-                    SaveFileDialog ttt = new SaveFileDialog();
-                    ttt.FileName = "Безымянный";
-                    ttt.Filter = "Текстовый файл|*.txt";
 
-                    if (ttt.ShowDialog() == DialogResult.OK)
-                    {
-                        File.WriteAllText(ttt.FileName, richTextBox1.Text);
-                    }
-                    else
-                    {
-                        Close();
-                    }
-                }
-                
-            }
+             e.Cancel = false;
+             if (richTextBox1.TextLength!=0)
+             {
+                 DialogResult res = MessageBox.Show("Сохранить?", "Внимание", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                 if (res == DialogResult.Cancel)
+                 {
+                    e.Cancel = true;
+                 }
+                 else if (res == DialogResult.Yes)
+                 {
+                     SaveFileDialog text = new SaveFileDialog();
+                     text.FileName = "Безымянный";
+                     text.Filter = "Текстовый файл|*.txt";
+                     
+                     if (text.ShowDialog() == DialogResult.OK)
+                     {
+                         File.WriteAllText(text.FileName, richTextBox1.Text);
+                     }
+                     else
+                     {
+                         Close();
+                     }
+                 }       
+             }
         }
 
     }
