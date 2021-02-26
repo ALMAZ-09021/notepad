@@ -15,113 +15,39 @@ namespace notepad
     {
         public Блокнот()
         {
-            InitializeComponent();
+            InitializeComponent();//инициализация элементов и форматов файлов
             openFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
             saveFileDialog1.Filter = "Text files(*.txt)|*.txt|All files(*.*)|*.*";
             fontDialog1.ShowColor = true;
         }
-        bool isSaved = true;
-        private void выходToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            
-                this.Close();
-            
-            
-        }
-        public bool UpdateInForm = false;
-        private void richtextBox1_TextChanged(object sender, EventArgs e)
-        {
-            UpdateInForm = true;
-        }
-        
-        private void richTextBox1_TextChanged(object sender, EventArgs e)
+        bool isSaved = true;//вводим переменную,проверяющую сохранен ли файл
+        private void richTextBox1_TextChanged(object sender, EventArgs e)//проверяем изменение сохраненного текста
         {
             isSaved =false;
-        }
-        private void сохранитьToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
-                return;
-            // получаем выбранный нами файл
-            string filename = saveFileDialog1.FileName;
-            // сохраняем текст в выбранный файл файл
-            System.IO.File.WriteAllText(filename, richTextBox1.Text);
-            MessageBox.Show("Файл сохранен");
-        }
-
-        private void открытьToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
-                return;
-            // получаем выбранный файл
-            string filename = openFileDialog1.FileName;
-            // прочитываем выбранный файл
-            string fileText = System.IO.File.ReadAllText(filename);
-            richTextBox1.Text = fileText;
-
-        }
-
-        private void выбратьВсеToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            richTextBox1.SelectAll();
-        }
-
-        private void вставитьToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Paste();
-        }
-
-        private void вырезатьToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            richTextBox1.Cut();
-        }
-
-        private void открытьToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
-                return;
-            // получаем выбранный файл
-            string filename = openFileDialog1.FileName;
-            // прочитываем выбранный файл
-            string fileText = System.IO.File.ReadAllText(filename);
-            richTextBox1.Text = fileText;
-         
-        }
-        private void сохранитьToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
-                return;
-            // получаем выбранный нами файл
-            string filename = saveFileDialog1.FileName;
-            // сохраняем текст в выбранный файл файл
-            System.IO.File.WriteAllText(filename, richTextBox1.Text);
-            MessageBox.Show("Файл сохранен");
-            isSaved = true;
-        }
-
+        } 
         private void выходToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            this.Close();
+            this.Close();//прекращает работу блокнота,перед этим проверив сохранена ли информация
         }
 
         private void выбратьВсеToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            richTextBox1.SelectAll();
+            richTextBox1.SelectAll();//выбирает весь текст,находящийся в блокноте
         }
 
         private void вставитьToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Paste();
+            richTextBox1.Paste();//вставляет скопированный текст
         }
 
         private void вырезатьToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            richTextBox1.Cut();
+            richTextBox1.Cut();//вырезает выделенную часть
         }
 
         private void изменитьШрифтцветToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (fontDialog1.ShowDialog() == DialogResult.Cancel)
+            if (fontDialog1.ShowDialog() == DialogResult.Cancel)//если передумали изменять цвет/шрифт,то возвращает к исходному тексту
                 return;
             // изменяется шрифт
             richTextBox1.SelectionFont = fontDialog1.Font;
@@ -131,48 +57,49 @@ namespace notepad
 
         private void оПрограммеToolStripMenuItem1_Click(object sender, EventArgs e)
         {
-            Form2 newForm = new Form2();
-            newForm.Show();
+            Form2 newForm = new Form2();//создает объект новой формы
+            newForm.Show();//отображает Form2 на экране
         }
 
         private void копироватьToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            richTextBox1.Copy();
+            richTextBox1.Copy();//копирует выделенный текст
         }
 
         private void создатьToolStripMenuItem1_Click(object sender, EventArgs e)
-        {
-            if (richTextBox1.TextLength != 0)
+        {   
+            if (!isSaved)
             {
-                DialogResult res = MessageBox.Show("Сохранить?", "Внимание", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (res == DialogResult.Yes)
+                DialogResult res = MessageBox.Show("Сохранить?", "Внимание", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (res == DialogResult.Cancel)
                 {
-                    SaveFileDialog ttt = new SaveFileDialog();
-                    ttt.FileName = "Безымянный";
-                    ttt.Filter = "Текстовый файл|*.txt";
-
-                    if (ttt.ShowDialog() == DialogResult.OK)
+                      //закрываем сообщение
+                }
+                else if (res == DialogResult.Yes)
+                {
+                    SaveFileDialog safety = new SaveFileDialog();
+                    safety.FileName = "Безымянный";
+                    safety.Filter = "Текстовый файл|*.txt";
+                    isSaved = true;
+                    if (safety.ShowDialog() == DialogResult.OK)
                     {
-                        File.WriteAllText(ttt.FileName, richTextBox1.Text);
+                        richTextBox1.Clear();
                     }
                 }
-                else
+                else//очищаем форму от текста
                 {
                     richTextBox1.Clear();
                 }
             }
-
         }
 
         private void Блокнот_FormClosing(object sender, FormClosingEventArgs e)
         {
-
-
              e.Cancel = false;
              if (!isSaved)
              {
                  DialogResult res = MessageBox.Show("Сохранить?", "Внимание", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
-                 if (res == DialogResult.Cancel)
+                 if (res == DialogResult.Cancel)//закрываем сообщение
                  {
                     e.Cancel = true;
                  }
@@ -186,7 +113,7 @@ namespace notepad
                      {
                          File.WriteAllText(text.FileName, richTextBox1.Text);
                      }
-                     else
+                     else//закрываем сообщение
                      {
                         e.Cancel = true;
                      }
@@ -194,7 +121,61 @@ namespace notepad
              }
         }
 
-        
+        private void сохранитьToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog1.ShowDialog() == DialogResult.Cancel)
+                return;
+            // получаем выбранный файл
+            string filename = saveFileDialog1.FileName;
+            // сохраняем текст в файл
+            System.IO.File.WriteAllText(filename, richTextBox1.Text);
+            MessageBox.Show("Файл сохранен");
+            isSaved = true;
+        }
+
+        private void открытьToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (!isSaved)
+            {
+                DialogResult res = MessageBox.Show("Сохранить?", "Внимание", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question);
+                if (res == DialogResult.Cancel)
+                {
+                    return;
+                }
+                else if (res == DialogResult.Yes)
+                {
+                    SaveFileDialog ttt = new SaveFileDialog();
+                    ttt.FileName = "Безымянный";
+                    ttt.Filter = "Текстовый файл|*.txt";
+                    isSaved = true;
+
+                    if (ttt.ShowDialog() == DialogResult.OK)
+                    {
+                        if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
+                            return;
+                        // получаем выбранный файл
+                        string filename = openFileDialog1.FileName;
+                        // читаем файл в строку
+                        string fileText = System.IO.File.ReadAllText(filename);
+                        richTextBox1.Text = fileText;
+                        MessageBox.Show("Файл открыт");
+                        isSaved = false;
+                    }
+                }
+                else
+                {
+                    if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
+                        return;
+                    // получаем выбранный файл
+                    string filename = openFileDialog1.FileName;
+                    // читаем файл в строку
+                    string fileText = System.IO.File.ReadAllText(filename);//копируем текст из исходного файла и вставляем в форму
+                    richTextBox1.Text = fileText;
+                    MessageBox.Show("Файл открыт");
+                    isSaved = false;
+                }
+            }
+        }
     }
 
 }

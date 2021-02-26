@@ -218,21 +218,18 @@
             this.открытьToolStripMenuItem.Name = "открытьToolStripMenuItem";
             this.открытьToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
             this.открытьToolStripMenuItem.Text = "Открыть";
-            this.открытьToolStripMenuItem.Click += new System.EventHandler(this.открытьToolStripMenuItem_Click);
             // 
             // сохранитьToolStripMenuItem
             // 
             this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
             this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
             this.сохранитьToolStripMenuItem.Text = "Сохранить";
-            this.сохранитьToolStripMenuItem.Click += new System.EventHandler(this.сохранитьToolStripMenuItem_Click);
             // 
             // выходToolStripMenuItem
             // 
             this.выходToolStripMenuItem.Name = "выходToolStripMenuItem";
             this.выходToolStripMenuItem.Size = new System.Drawing.Size(166, 26);
             this.выходToolStripMenuItem.Text = "Выход";
-            this.выходToolStripMenuItem.Click += new System.EventHandler(this.выходToolStripMenuItem_Click);
             // 
             // правкаToolStripMenuItem
             // 
@@ -249,21 +246,19 @@
             this.выбратьВсеToolStripMenuItem.Name = "выбратьВсеToolStripMenuItem";
             this.выбратьВсеToolStripMenuItem.Size = new System.Drawing.Size(256, 26);
             this.выбратьВсеToolStripMenuItem.Text = "Выбрать все        Ctrl+A";
-            this.выбратьВсеToolStripMenuItem.Click += new System.EventHandler(this.выбратьВсеToolStripMenuItem_Click);
             // 
             // вставитьToolStripMenuItem
             // 
             this.вставитьToolStripMenuItem.Name = "вставитьToolStripMenuItem";
             this.вставитьToolStripMenuItem.Size = new System.Drawing.Size(256, 26);
             this.вставитьToolStripMenuItem.Text = "Вставить               Ctrl+C";
-            this.вставитьToolStripMenuItem.Click += new System.EventHandler(this.вставитьToolStripMenuItem_Click);
             // 
             // вырезатьToolStripMenuItem
             // 
             this.вырезатьToolStripMenuItem.Name = "вырезатьToolStripMenuItem";
             this.вырезатьToolStripMenuItem.Size = new System.Drawing.Size(256, 26);
             this.вырезатьToolStripMenuItem.Text = "Вырезать              Ctrl+X";
-            this.вырезатьToolStripMenuItem.Click += new System.EventHandler(this.вырезатьToolStripMenuItem_Click);
+            
             // 
             // шрифтToolStripMenuItem
             // 
