@@ -144,12 +144,12 @@ namespace notepad
                 }
                 else if (res == DialogResult.Yes)
                 {
-                    SaveFileDialog ttt = new SaveFileDialog();
-                    ttt.FileName = "Безымянный";
-                    ttt.Filter = "Текстовый файл|*.txt";
+                    SaveFileDialog safety = new SaveFileDialog();
+                    safety.FileName = "Безымянный";
+                    safety.Filter = "Текстовый файл|*.txt";
                     isSaved = true;
 
-                    if (ttt.ShowDialog() == DialogResult.OK)
+                    if (safety.ShowDialog() == DialogResult.OK)
                     {
                         if (openFileDialog1.ShowDialog() == DialogResult.Cancel)
                             return;
