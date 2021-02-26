@@ -52,7 +52,7 @@ namespace notepad
             // изменяется шрифт
             richTextBox1.SelectionFont = fontDialog1.Font;
             // изменяется цвет
-            richTextBox1.ForeColor = fontDialog1.Color;
+            richTextBox1.SelectionColor = fontDialog1.Color;
         }
 
         private void оПрограммеToolStripMenuItem1_Click(object sender, EventArgs e)
